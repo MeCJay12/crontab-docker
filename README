@@ -1,0 +1,31 @@
+# Crontab
+Crontab is a basic container for running custom scripts on regular schedules. It uses the standard Cron package that is built into Ubuntu and the like.
+
+## Usage
+The most basic config looks like this:
+
+```
+docker run -d \
+	--name Crontab \
+	--mount type=bind,src=/path/,dst=/etc/cron.d/ \
+	mecjay12/crontab
+```
+
+This mounts a standard crontab file (like you'd make with crontab -e on a system). This can be any file extension either direct file mounted or directory mounted to /etc/cron.d/ . Additional options include:
+
+Mounting the docker socket to run docker commands on the host:
+
+```
+	--mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+	--constraint node.role==manager
+```
+
+Setting a time zone (defaults to UTC):
+
+```
+	-e TZ=America/New_York
+```
+
+## Dockerhub
+
+https://hub.docker.com/r/mecjay12/crontab
