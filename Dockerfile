@@ -3,11 +3,11 @@ MAINTAINER christian@cshaheen.tech
 
 # Sets timezone to UTC by default
 ENV TZ=UTC
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Cron, Docker, wget, curl, and TZDate 
 RUN apt-get update
-RUN apt-get -y install cron wget curl docker.io
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
+RUN apt-get -y install cron wget curl docker.io tzdata
 RUN rm -rf /var/lib/apt/lists/*
 
 # Make directories for mount points
