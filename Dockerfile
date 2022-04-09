@@ -5,9 +5,10 @@ MAINTAINER christian@cshaheen.tech
 ENV TZ=UTC
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Install Cron, Docker, wget, curl, and TZDate 
+# Install Cron, Docker, wget, curl, and TZDate
 RUN apt-get update
-RUN apt-get -y install cron wget curl docker.io tzdata
+RUN apt-get -y install cron wget curl docker.io tzdata python3 python3-pip
+RUN pip install requests qbittorrent-api
 RUN rm -rf /var/lib/apt/lists/*
 
 # Make directories for mount points
