@@ -6,19 +6,10 @@ ENV TZ=UTC
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Cron, Docker, wget, curl, and TZDate
-RUN apt-get update
-RUN apt-get -y install cron wget curl docker.io tzdata python3 python3-pip
+RUN apt-get -y update
+RUN apt-get -y install cron wget curl docker.io tzdata python3 python3-pip rsync
 RUN pip install requests qbittorrent-api
 RUN rm -rf /var/lib/apt/lists/*
-
-# Make directories for mount points
-RUN mkdir -p /etc/cron.d/
-RUN mkdir -p /root/.ssh/
-RUN mkdir -p /scripts/
-RUN touch /var/run/docker.sock
-
-# Make directories mount points
-VOLUME /etc/cron.d/ /root/.ssh/ /scripts/
 
 # Make log file
 RUN touch /var/log/cron.log
