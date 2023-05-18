@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Cron, Docker, wget, curl, and TZDate
 RUN apt-get -y update
-RUN apt-get -y install cron wget curl docker.io tzdata python3 python3-pip rsync dnsutils
+RUN apt-get -y install cron wget curl docker.io tzdata python3 python3-pip rsync dnsutils openssl
 RUN pip3 install requests qbittorrent-api
 RUN apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
