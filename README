@@ -1,30 +1,18 @@
 # Crontab
-Crontab is a basic container for running custom scripts on regular schedules. It uses the standard Cron package that is built into Ubuntu and the like.
+Crontab is a basic container for running custom scripts on regular schedules using Cron.
 
 ## Usage
-The most basic config looks like this:
+This repo contains two images: mecjay12/crontab:2_alpine and mecjay12/crontab:2_debian. You should use Alpine, if possible, as it is a lighter weight container. This repo has no :latest tag!
 
-```
-docker run -d \
-	--name Crontab \
-	--mount type=bind,src=/path/,dst=/etc/cron.d/ \
-	mecjay12/crontab
-```
+No variables are strictly required. Set what's relevant and you are good to go. Variables are the same for both Alpine and Debian
 
-This mounts a standard crontab file (like you'd make with crontab -e on a system). This can be any file extension either direct file mounted or directory mounted to /etc/cron.d/ . Additional options include:
-
-Mounting the docker socket to run docker commands on the host:
-
-```
-	--mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-	--constraint node.role==manager
-```
-
-Setting a time zone (defaults to UTC):
-
-```
-	-e TZ=America/New_York
-```
+| Variable | Default    | Descripton |
+|----------|------------|------------|
+| SETUP    |            | Commands or script to run before cron, setting up the container/main script. |
+| SCRIPT   |            | Main script to run via Cron |
+| SCHEDULE |            | Cron standard schedule |
+| TZ       | UTC        | Tzdata standard timezone |
+| RUN      | cron(d) -f | Command to run to start Cron (becuase it's different in each image). Probably should be left alone. | 
 
 ## Dockerhub
 
